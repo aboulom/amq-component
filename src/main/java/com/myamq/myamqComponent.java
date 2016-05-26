@@ -1,4 +1,4 @@
-package com.example;
+package com.myamq;
 
 import java.util.Map;
 

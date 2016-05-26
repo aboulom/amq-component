@@ -1,4 +1,4 @@
-package com.example;
+package com.myamq;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;

@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
-       xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xsi:schemaLocation="
          http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
          http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+         
+	<!-- <broker brokerName="embedded-broker" useJmx="false" persistent="false"> 
+			<destinationInterceptors> 
+				<virtualDestinationInterceptor> 
+					<virtualDestinations> 
+						<virtualTopic name=">" prefix="Consumer.*.VirtualTopic." /> 
+	 				</virtualDestinations> 
+				</virtualDestinationInterceptor> 
+			</destinationInterceptors> 
+		</broker>-->
 
-  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
-  <route id="testroute">
-    <from uri="file:target/input"/>
-    <to uri="myamq:foo"/>
-    <to uri="file:target/output/message1"/>
-    <to uri="myamq:bar"/>
-    <to uri="file:target/output/message2"/>
-    <to uri="myamq:work"/>
-    <to uri="file:target/output/message3"/>
-  </route>
-</camelContext>
+	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
+		<route id="testroute">
+			<from uri="file:target/input" />
+			<to	uri="activemq:topic:VirtualTopic.foo?username=admin&amp;password=admin" />
+		</route>
+		<route id="message1route">
+			<from uri="activemq:queue:Consumer.1.VirtualTopic.foo?username=admin&amp;password=admin" />
+			<to uri="myamq:foo" />
+			<to uri="file:target/output/message1" />
+		</route>
+		<route id="message2route">
+			<from uri="activemq:queue:Consumer.2.VirtualTopic.foo?username=admin&amp;password=admin" />
+			<to uri="myamq:bar" />
+			<to uri="file:target/output/message2" />
+		</route>
+	</camelContext>
 
 </blueprint>

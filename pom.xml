@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.example</groupId>
+  <groupId>com.myamq</groupId>
   <artifactId>amq-component</artifactId>
   <packaging>bundle</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -90,7 +90,7 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Bundle-SymbolicName>com.example.amq-component</Bundle-SymbolicName>
+            <Bundle-SymbolicName>com.myamq.amq-component</Bundle-SymbolicName>
             <Export-Service>org.apache.camel.spi.ComponentResolver;component=myamq</Export-Service>
           </instructions>
         </configuration>

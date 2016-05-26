@@ -1,5 +1,5 @@
 
-package com.example;
+package com.myamq;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultProducer;

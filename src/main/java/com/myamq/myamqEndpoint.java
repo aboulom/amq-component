@@ -1,4 +1,4 @@
-package com.example;
+package com.myamq;
 
 import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
