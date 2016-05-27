@@ -6,30 +6,26 @@
          http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
          
 	<!-- <broker brokerName="embedded-broker" useJmx="false" persistent="false"> 
-			<destinationInterceptors> 
-				<virtualDestinationInterceptor> 
-					<virtualDestinations> 
-						<virtualTopic name=">" prefix="Consumer.*.VirtualTopic." /> 
-	 				</virtualDestinations> 
-				</virtualDestinationInterceptor> 
-			</destinationInterceptors> 
-		</broker>-->
+		<destinationInterceptors> <virtualDestinationInterceptor> <virtualDestinations> 
+		<virtualTopic name="VirtualTopic.>" prefix="Consumer.*.VirtualTopic." /> 
+		<virtualTopic name="VirtualTopic.>" prefix="Consumer.*." /> </virtualDestinations> 
+		</virtualDestinationInterceptor> </destinationInterceptors> </broker>-->
 
 	<camelContext xmlns="http://camel.apache.org/schema/blueprint">
 		<route id="testroute">
 			<from uri="file:target/input" />
-			<to	uri="activemq:topic:VirtualTopic.foo?username=admin&amp;password=admin" />
+			<to	uri="activemq:topic:VirtualTopic.Orders?username=admin&amp;password=admin" />
 		</route>
 		<route id="message1route">
-			<from uri="activemq:queue:Consumer.1.VirtualTopic.foo?username=admin&amp;password=admin" />
+			<from uri="activemq:queue:Consumer.A.VirtualTopic.Orders?username=admin&amp;password=admin" />
 			<to uri="myamq:foo" />
 			<to uri="file:target/output/message1" />
 		</route>
 		<route id="message2route">
-			<from uri="activemq:queue:Consumer.2.VirtualTopic.foo?username=admin&amp;password=admin" />
+			<from uri="activemq:queue:Consumer.B.VirtualTopic.Orders?username=admin&amp;password=admin" />
 			<to uri="myamq:bar" />
 			<to uri="file:target/output/message2" />
 		</route>
 	</camelContext>
-
+	<!--?username=admin&amp;password=admin"-->
 </blueprint>
